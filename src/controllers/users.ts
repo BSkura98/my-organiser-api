@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { hash, compare } from "bcrypt";
+import jwt from "jsonwebtoken";
 
 interface User {
   name: string;
@@ -30,7 +31,10 @@ const login = async (req: Request, res: Response) => {
   }
   try {
     if (await compare(req.body.password, user.password)) {
-      res.status(200).send("Successfully logged in");
+      const userData = { name: user.name };
+
+      const accessToken = jwt.sign(userData, process.env.ACCESS_TOKEN_SECRET);
+      res.status(200).json({ accessToken: accessToken });
     } else {
       res.status(401).send("Incorrect password");
     }
