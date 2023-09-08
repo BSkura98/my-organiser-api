@@ -33,8 +33,13 @@ const login = async (req: Request, res: Response) => {
     if (await compare(req.body.password, user.password)) {
       const userData = { name: user.name };
 
-      const accessToken = jwt.sign(userData, process.env.ACCESS_TOKEN_SECRET);
-      res.status(200).json({ accessToken: accessToken });
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "15s",
+      });
+      const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+      res
+        .status(200)
+        .json({ accessToken: accessToken, refreshToken: refreshToken });
     } else {
       res.status(401).send("Incorrect password");
     }
