@@ -13,7 +13,7 @@ const getUsers = async (req: Request, res: Response) => {
   res.status(200).json(users);
 };
 
-const addUser = async (req: Request, res: Response) => {
+const register = async (req: Request, res: Response) => {
   try {
     const hashedPassword = await hash(req.body.password, 10);
     const user = { name: req.body.name, password: hashedPassword };
@@ -48,4 +48,4 @@ const login = async (req: Request, res: Response) => {
   }
 };
 
-export { getUsers, addUser, login };
+export { getUsers, register, login };
