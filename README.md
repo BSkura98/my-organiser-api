@@ -1,5 +1,5 @@
-# social-networking-api
-This is an API for social networking website.
+# my-organizer-api
+This is an API for an application used for organizing tasks, notes and everything that may be useful for projects.
 
 #### This API is in an early stage of development
 
@@ -7,6 +7,3 @@ This is an API for social networking website.
 * Node.js
 * Express.js
 * TypeScript
-
-## Status
-Project is _in progress_
