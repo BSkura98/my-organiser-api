@@ -1,13 +1,23 @@
-import express, { Express, Request, Response } from "express";
-import dotenv from "dotenv";
+import "dotenv/config";
 
 import { createApp } from "./app.js";
-
-dotenv.config();
+import { AppDataSource } from "./AppDataSource.js";
 
 const app = createApp();
 const port = process.env.PORT || 8080;
 
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});
+const databaseInitialized = await AppDataSource.initialize()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+    return true;
+  })
+  .catch((err) => {
+    console.error("Error during Data Source initialization", err);
+    return false;
+  });
+
+if (databaseInitialized) {
+  app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+  });
+}
