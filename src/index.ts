@@ -1,9 +1,7 @@
-import dotenv from "dotenv";
+import "dotenv/config";
 
 import { createApp } from "./app.js";
 import { AppDataSource } from "./AppDataSource.js";
-
-dotenv.config();
 
 const app = createApp();
 const port = process.env.PORT || 8080;

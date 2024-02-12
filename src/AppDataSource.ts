@@ -1,8 +1,6 @@
 import { DataSource, DataSourceOptions } from "typeorm";
-import dotenv from "dotenv";
-import { getDirName } from "./utils/path.js";
 
-dotenv.config();
+import { getDirName } from "./utils/path.js";
 
 const dataSourceOptions: DataSourceOptions = {
   type: "mysql",
